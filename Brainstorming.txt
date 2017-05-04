@@ -1,0 +1,8 @@
+//background changer every amount of points
+    -randomly pick a color
+
+//prime time
+    - when score is prime 
+    - Flash
+        - PRIME TIME!
+        - 

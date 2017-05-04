@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Random Color Generator Code</title>
+	<script 
+		src="http://code.jquery.com/jquery-3.2.1.js" 
+		integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" 
+		crossorigin="anonymous"
+	></script>
+	<script>
+		//generates color in hex value
+		$(document).ready(function(){
+			function get_random_color() {
+				function c() {
+					var hex = Math.floor(Math.random()*256).toString(16);
+					return ("0"+String(hex)).substr(-2); // pad with zero
+				}
+				return "#"+c()+c()+c();
+			}
+			//generates color in rgb values.
+			function getRandomColor() {
+				var red = Math.floor(Math.random()*256);
+				var blue = Math.floor(Math.random()*256);
+				var green = Math.floor(Math.random()*256);
+				return 'rgb('+ red + ',' + blue + ',' + green +')';
+			}
+		$('h1').css('background-color', get_random_color());
+		var image = $('<img src="https://s-media-cache-ak0.pinimg.com/236x/0b/92/7d/0b927d794131f1fb2cde44027f4f3e7d.jpg">');
+		$('body').append(image);
+		image.css({position: "absolute"});
+		image.animate({left: '500'}, 1000);
+		image.animate({top: '500'}, 1000);
+		});
+
+	</script>
+</head>
+<body>
+	<h1>Hello world</h1>
+	
+</body>
+</html>
+
+

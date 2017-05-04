@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Riding through the Danger Zone!</title>
+
+    <link href = "style.css" rel="stylesheet" type="text/css">
+    <!--code.jquery.com - uncompressed -->
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous">
+    </script>
+</head>
+<body>
+    <!--masher and points meter-->
+    <div align="center" class="controls">
+        <span id="points"></span>
+        <img id="buy-masher" src="smasher.png" height="200px">
+        <span id="mashers"></span>
+    </div>
+    <!--clicking part for game-->
+    <div align="center" id="safe-zone" class="click-zone">
+        <div id="danger-zone" class="click-zone">
+            <div id="sweet-spot" class="click-zone">
+            </div>
+        </div>
+    </div>
+    <script>
+        var points = 0 ;
+        var mashers = 0;
+        //displays points
+        function showPoints(){
+            $('#points').text(points);
+            $('#mashers').text(mashers);
+        }
+        //changes points and calls showPoints()
+        function runMashers(){
+            points += mashers;
+            showPoints();
+        }
+        //gets random hex code color value
+        function get_random_color() {
+                function c() {
+                    var hex = Math.floor(Math.random()*256).toString(16);
+                    return ("0"+String(hex)).substr(-2); // pad with zero
+                }
+                return "#"+c()+c()+c();
+        }
+        //jQuery code
+        $(document).ready(function(){
+            /*
+            $('#clickme').click(function(){
+                points++;
+                 showPoints();
+             }); 
+             */
+            //the green part of page, adds points when clicked and changes background color to random.
+            $('#safe-zone').click(function(){
+                points++;
+                showPoints();
+                $('body').css('background-color', get_random_color());
+
+                //function to be designed later, sorry for the language.
+                /*
+                var bodyColor = $('body').css('background-color');
+                var zoneColor = $(this).css('background-color');
+                if(bodyColor === zoneColor){
+                    
+                    crazyShitHappens();
+                }
+                */
+            });
+            //the red part. will take away points and show you doc brown
+            $('#danger-zone').click(function(){
+                points -= 500;
+                showPoints();
+                //doc brown image stuff
+                var image = $('<img src="http://facts.be/app/uploads/image2.jpg">');
+                image.css({position: "absolute"});
+                $('body').prepend(image);
+                image.animate({top: 400, left: 600}, 100);
+                image.animate({top: 0, left: 1200}, 100);
+                image.animate({top: 400, left: 600}, 100);
+                image.animate({top: 1200, left: 0}, 100);
+                image.fadeOut();
+
+            });
+            //the tiny dot
+            $('#sweet-spot').click(function(){
+                points += 1000;
+                showPoints();
+            });
+            //the hammer thing
+            $('#buy-masher').click(function(){
+                points -= 10;
+                mashers++;
+                showPoints();
+            });
+            //runs when page is loaded, wont see this happening until mashers > 0.
+            setInterval(runMashers, 1000);
+        });
+    </script>
+</body>
+</html>
